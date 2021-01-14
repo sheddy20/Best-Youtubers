@@ -8,63 +8,101 @@ class QuoteList extends StatefulWidget {
 }
 
 class _QuoteListState extends State<QuoteList> {
-  bool changeBackground = true;
-
-  void _change() {
-    setState(() {
-      changeBackground = true;
-    });
-  }
-
-  void _revert() {
-    setState(() {
-      changeBackground = false;
-    });
-  }
-
   List<Quote> _quotes = [
-    Quote(author: "Marques Brownlee", text: "i love to explain tech."),
-    Quote(author: "Mayuko Inoue", text: "i have a youtube channel."),
-    Quote(author: "Brad Traversy", text: "I teach web dev on youtube"),
-    Quote(author: "Tadas Patras", text: "i teach flutter on youtube"),
+    Quote(
+        author: "Marques Brownlee",
+        text: "i love to explain tech.",
+        imageUrl: "Asset/mac.jpeg"),
+    Quote(
+      author: "Mayuko Inoue",
+      text: "i have a youtube channel.",
+      imageUrl: "Asset/mayuko.jpg",
+    ),
+    Quote(
+      author: "Brad Traversy",
+      text: "I teach web dev on youtube",
+      imageUrl: "Asset/brad.jpeg",
+    ),
+    Quote(
+      author: "Tadas Patras",
+      text: "i teach flutter on youtube",
+      imageUrl: "Asset/tadas.jpeg",
+    ),
   ];
+
+  Widget quoteTemplate(quote) {
+    return Card(
+      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18.0),
+      ),
+      elevation: 0.0,
+      child: Padding(
+        padding: EdgeInsets.all(12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                  backgroundImage: AssetImage(quote.imageUrl),
+                  radius: 35.0,
+                ),
+              ],
+            ),
+            SizedBox(height: 10.0),
+            Text(
+              quote.text,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 6.0),
+            Text(
+              quote.author,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: changeBackground ? Colors.white : Colors.black,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Best Youtubers"),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {},
+        ),
+        actions: [
+          IconButton(
+            icon: FaIcon(FontAwesomeIcons.youtube),
+            onPressed: () {},
+          ),
+        ],
+        title: Text("Favourite Youtubers"),
         centerTitle: true,
       ),
-      body: Column(
+      body: ListView(
         children: _quotes.map((quote) {
-          return Text(
-            '${quote.text} - ${quote.author}',
-            style: TextStyle(
-              fontSize: 18.0,
-              color: changeBackground ? Colors.black : Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
+          return quoteTemplate(
+            quote,
           );
         }).toList(),
       ),
-      floatingActionButton: ButtonBar(
-        children: [
-          IconButton(
-            icon: Icon(FontAwesomeIcons.volumeUp),
-            onPressed: _change,
-            iconSize: 35.0,
-            color: Colors.red,
-          ),
-          IconButton(
-            icon: Icon(FontAwesomeIcons.volumeDown),
-            onPressed: _revert,
-            iconSize: 35.0,
-            color: Colors.red,
-          ),
-        ],
-        buttonHeight: 50.0,
-        buttonPadding: EdgeInsets.all(20.0),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.purpleAccent.shade700,
+        child: Icon(Icons.person),
       ),
     );
   }
