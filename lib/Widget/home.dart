@@ -1,3 +1,4 @@
+import 'package:Quotes/Widget/quoteCard.dart';
 import 'package:Quotes/classes/quotes.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,68 +12,24 @@ class _QuoteListState extends State<QuoteList> {
   List<Quote> _quotes = [
     Quote(
         author: "Marques Brownlee",
-        text: "i love to explain tech.",
+        text: "I make tech videos on youtube",
         imageUrl: "Asset/mac.jpeg"),
     Quote(
       author: "Mayuko Inoue",
-      text: "i have a youtube channel.",
+      text: "I upload my dev videos on youtube",
       imageUrl: "Asset/mayuko.jpg",
     ),
     Quote(
       author: "Brad Traversy",
-      text: "I teach web dev on youtube",
+      text: "I Teach web dev and programming on youtube",
       imageUrl: "Asset/brad.jpeg",
     ),
     Quote(
-      author: "Tadas Patras",
-      text: "i teach flutter on youtube",
+      author: "Tadas Petra",
+      text: "I teach beginners how to build flutter apps",
       imageUrl: "Asset/tadas.jpeg",
     ),
   ];
-
-  Widget quoteTemplate(quote) {
-    return Card(
-      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18.0),
-      ),
-      elevation: 0.0,
-      child: Padding(
-        padding: EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Row(
-              children: [
-                CircleAvatar(
-                  backgroundImage: AssetImage(quote.imageUrl),
-                  radius: 35.0,
-                ),
-              ],
-            ),
-            SizedBox(height: 10.0),
-            Text(
-              quote.text,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 6.0),
-            Text(
-              quote.author,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,15 +51,14 @@ class _QuoteListState extends State<QuoteList> {
       ),
       body: ListView(
         children: _quotes.map((quote) {
-          return quoteTemplate(
-            quote,
-          );
+          return QuoteCard(
+              quote: quote,
+              delete: () {
+                setState(() {
+                  _quotes.remove(quote);
+                });
+              });
         }).toList(),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.purpleAccent.shade700,
-        child: Icon(Icons.person),
       ),
     );
   }

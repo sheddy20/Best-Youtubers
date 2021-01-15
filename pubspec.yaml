@@ -30,6 +30,7 @@ dependencies:
   http: ^0.12.2
   get: ^3.24.0
   font_awesome_flutter: ^8.11.0
+  url_launcher: ^5.7.10
   cupertino_icons: ^1.0.0
 
 dev_dependencies:

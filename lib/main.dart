@@ -11,7 +11,7 @@ class MyQuotes extends StatelessWidget {
       title: "Quotes",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: Colors.purpleAccent.shade700,
+        primaryColor: Colors.red[600],
         brightness: Brightness.dark,
       ),
       home: QuoteList(),
